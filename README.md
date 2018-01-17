@@ -4,9 +4,6 @@
 - Java SDK (8)
 - Scala Build Tool (sbt)
   - http://www.scala-sbt.org/1.0/docs/Setup.html
-- Spark (2.2.1)
-  - https://spark.apache.org/downloads.html
-  - local mode
 
 Developed on an Ubuntu 16.04 linux system, using Oracle Java 8.
 
@@ -36,28 +33,6 @@ runMain MailRecordsAvroScript "/data/src/enron_emails/enron_with_categories"
 // rm enron_email_records.parquet # if it exists
 runMain AvroToParquetScript "enron_email_records.avro" "enron_email_records.parquet"
 ```
-
-### Email Spark Analysis
-
-Package a jar containing the application
-
-```bash
-sbt package
-...
-[info] Packaging {..}/{..}/target/scala-2.11/enron-emails_2.11-1.0.jar
-```
-
-Use spark-submit to run analysis
-```bash
-PACKAGE_JAR="target/scala-2.11/enron-emails_2.11-1.0.jar"
-SPARK_HOME=/opt/spark-2.2.1-bin-hadoop2.7
-${SPARK_HOME}/bin/spark-submit \
-  --class "SparkAnalysisApp" \
-  --master local[2] \
-  ${PACKAGE_JAR} \
-  enron_email_records.parquet  2> spark_analysis.log
-```
-
 
 # Some Resources
 
@@ -111,7 +86,16 @@ file formats common to the big-data world, such as parquet, orc, csv in location
 or Hive tables. In contrast to distributed batch or streaming engines such as Spark or Flink,
 Eel is an SDK intended to be used directly in process."
 
+### ElasticSearch
+
+- https://github.com/sksamuel/elastic4s
+
 ### Gmail analysis
 
 - https://github.com/rjurney/Agile_Data_Code/tree/master/ch03
   - Pig, MongoDB, ElasticSearch
+
+### Scala SQL
+
+- https://github.com/aselab/scala-activerecord
+- https://github.com/aselab/scala-activerecord-sample/tree/master/sample/src/main/scala
